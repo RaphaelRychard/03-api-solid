@@ -1,3 +1,3 @@
 import { test } from 'vitest'
 
-test('Register', () => {})
+test('Auhtenticate', () => {})
