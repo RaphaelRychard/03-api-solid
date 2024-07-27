@@ -16,7 +16,7 @@ describe('Create Gym (e2e)', () => {
     const { token } = await createAuthenticateUser(app)
 
     const response = await request(app.server)
-      .post('/gyms/search')
+      .post('/gyms')
       .set('Authorization', `Bearer ${token}`)
       .send({
         title: 'JavaScript Gyms',

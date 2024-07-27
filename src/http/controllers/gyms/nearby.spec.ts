@@ -19,7 +19,7 @@ describe('Nearby (e2e)', () => {
       .post('/gyms')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        title: 'JavaScript Gyms',
+        title: 'JavaScript Gym',
         description: 'Some description',
         phone: '659000000',
         latitude: -15.5104082,
@@ -30,7 +30,7 @@ describe('Nearby (e2e)', () => {
       .post('/gyms')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        title: 'Typescript Gyms',
+        title: 'Typescript Gym',
         description: 'Some description',
         phone: '659000000',
         latitude: -13.8522464,
@@ -40,8 +40,8 @@ describe('Nearby (e2e)', () => {
     const response = await request(app.server)
       .get('/gyms/nearby')
       .query({
-        latitude: -13.8522464,
-        longitude: -73.375774,
+        latitude: -15.5104082,
+        longitude: -56.0340586,
       })
       .set('Authorization', `Bearer ${token}`)
       .send()
@@ -50,7 +50,7 @@ describe('Nearby (e2e)', () => {
     expect(response.body.gyms).toHaveLength(1)
     expect(response.body.gyms).toEqual([
       expect.objectContaining({
-        title: 'JavaScript Gyms',
+        title: 'JavaScript Gym',
       }),
     ])
   })
