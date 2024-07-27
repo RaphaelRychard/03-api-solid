@@ -1,5 +1,5 @@
 import { CheckIn } from '@prisma/client'
-import { CheckInRepository } from '@/repositories/check-ins-repository'
+import { CheckInsRepository } from '@/repositories/check-ins-repository'
 
 interface FetchUserCheckInsHistoryUseCaseRequest {
   userId: string
@@ -11,7 +11,7 @@ interface FetchUserCheckInsHistoryUseCaseResponse {
 }
 
 export class FetchUserCheckInsHistoryUseCase {
-  constructor(private checkInRepository: CheckInRepository) {}
+  constructor(private checkInRepository: CheckInsRepository) {}
 
   async execute({
     userId,

@@ -1,5 +1,5 @@
 import { CheckIn } from '@prisma/client'
-import { CheckInRepository } from '@/repositories/check-ins-repository'
+import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import dayjs from 'dayjs'
 import { LateCheckInValidateError } from './errors/lete-check-in-validation-error'
@@ -13,7 +13,7 @@ interface ValidateResponse {
 }
 
 export class ValidateCheckInUseCase {
-  constructor(private checkInRepository: CheckInRepository) {}
+  constructor(private checkInRepository: CheckInsRepository) {}
 
   async execute({ checkInId }: ValidateRequest): Promise<ValidateResponse> {
     const checkIn = await this.checkInRepository.findById(checkInId)

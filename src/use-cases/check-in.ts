@@ -1,5 +1,5 @@
 import { CheckIn } from '@prisma/client'
-import { CheckInRepository } from '@/repositories/check-ins-repository'
+import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { GymsRepository } from '@/repositories/gyms-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
@@ -19,7 +19,7 @@ interface CheckInUseCaseResponse {
 
 export class CheckInUseCase {
   constructor(
-    private checkInRepository: CheckInRepository,
+    private checkInRepository: CheckInsRepository,
     private gymsRepository: GymsRepository,
   ) {}
 
