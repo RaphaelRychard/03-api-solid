@@ -39,7 +39,6 @@ GymPass style app.
   npm i zod
   npm i vitest vite-tsconfig-paths -D
 
-
    "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
