@@ -5,7 +5,7 @@ import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate
 
 export async function authenticate(
   request: FastifyRequest,
-  replay: FastifyReply,
+  reply: FastifyReply,
 ) {
   const authenticateBodySchema = z.object({
     email: z.string().email(),
@@ -22,7 +22,7 @@ export async function authenticate(
       password,
     })
 
-    const token = await replay.jwtSign(
+    const token = await reply.jwtSign(
       {},
       {
         sign: {
@@ -31,12 +31,30 @@ export async function authenticate(
       },
     )
 
-    return replay.status(200).send({
-      token,
-    })
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+          expiresIn: '7d',
+        },
+      },
+    )
+
+    return reply
+      .setCookie('refreshToken', refreshToken, {
+        path: '/',
+        secure: true, // cookie vai ser imcripitado pelo https e o front não sonsegue ler
+        sameSite: true, // só vai ser acessesivel dentro do mesmo site
+        httpOnly: true, // que só vai ser acessado pelo backend da aplicação
+      })
+      .status(200)
+      .send({
+        token,
+      })
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
-      return replay.status(400).send({ message: err.message })
+      return reply.status(400).send({ message: err.message })
     }
 
     return err

@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-alreadu-exisits-error'
 import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case'
 
-export async function register(request: FastifyRequest, replay: FastifyReply) {
+export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
@@ -22,11 +22,11 @@ export async function register(request: FastifyRequest, replay: FastifyReply) {
     })
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {
-      return replay.status(409).send()
+      return reply.status(409).send()
     }
 
-    return replay.status(500).send() // TODO: fix me
+    return reply.status(500).send() // TODO: fix me
   }
 
-  return replay.status(201).send()
+  return reply.status(201).send()
 }

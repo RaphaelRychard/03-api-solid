@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { makeSearchGymsUseCase } from '@/use-cases/factories/make-search-gyms-use-case'
 
-export async function search(request: FastifyRequest, replay: FastifyReply) {
+export async function search(request: FastifyRequest, reply: FastifyReply) {
   const searchGymsQuerySchema = z.object({
     q: z.string(),
     page: z.coerce.number().min(0).default(1),
@@ -17,7 +17,7 @@ export async function search(request: FastifyRequest, replay: FastifyReply) {
     page,
   })
 
-  return replay.status(200).send({
+  return reply.status(200).send({
     gyms,
   })
 }
