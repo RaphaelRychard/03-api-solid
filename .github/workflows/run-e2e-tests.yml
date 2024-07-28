@@ -5,7 +5,8 @@ on: [pull_request]
 jobs:
   run-e2e-tests:
     name: Run E2E Tests
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
+
 
     services:
       postgres:
@@ -16,7 +17,6 @@ jobs:
           POSTGRESQL_USERNAME: docker
           POSTGRESQL_PASSWORD: docker
           POSTGRESQL_DATABASE: apisolid
-
 
     steps:
     - uses: actions/checkout@v4
